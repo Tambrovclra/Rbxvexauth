@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Robux Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #8e2de2, #4a00e0);
+      color: white;
+      text-align: center;
+      padding-top: 80px;
+    }
+    input {
+      padding: 12px;
+      margin: 10px;
+      width: 80%;
+      max-width: 300px;
+      border: none;
+      border-radius: 8px;
+    }
+    button {
+      padding: 12px 25px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff4081;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e91e63;
+    }
+    #message {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <h2>Đăng nhập Robux</h2>
+  <input id="email" type="email" placeholder="Email"><br>
+  <input id="password" type="password" placeholder="Mật khẩu"><br>
+  <button onclick="signUp()">Đăng ký</button>
+  <button onclick="signIn()">Đăng nhập</button>
+  <p id="message"></p>
+
+  <script>
+    // Firebase config của bạn (đầy đủ)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBbTe4CZM8mUqsJUyFBIjcSc3w4rvIbmzc",
+      authDomain: "robuxvex.firebaseapp.com",
+      projectId: "robuxvex",
+      storageBucket: "robuxvex.firebasestorage.app",
+      messagingSenderId: "291500837886",
+      appId: "1:291500837886:web:08ae60ca6454c209328eaf",
+      measurementId: "G-LWRKTMPXEN"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    function signUp() {
+      const email = document.getElementById("email").value;
+      const pass = document.getElementById("password").value;
+      firebase.auth().createUserWithEmailAndPassword(email, pass)
+        .then(() => {
+          document.getElementById("message").innerText = "✅ Đăng ký thành công!";
+        })
+        .catch(err => {
+          document.getElementById("message").innerText = "❌ " + err.message;
+        });
+    }
+
+    function signIn() {
+      const email = document.getElementById("email").value;
+      const pass = document.getElementById("password").value;
+      firebase.auth().signInWithEmailAndPassword(email, pass)
+        .then(() => {
+          document.getElementById("message").innerText = "✅ Đăng nhập thành công!";
+        })
+        .catch(err => {
+          document.getElementById("message").innerText = "❌ " + err.message;
+        });
+    }
+  <script>
+  function login() {
+    const email = document.getElementById("email").value;
+    const pass = document.getElementById("password").value;
+
+    firebase.auth().signInWithEmailAndPassword(email, pass)
+      .then(() => {
+        window.location.href = "https://robuxvex.vercel.app/"; // Hoặc robux.html tùy bạn
+      })
+      .catch(err => {
+        document.getElementById("message").innerText = "❌ " + err.message;
+      });
+  }
+</script>
+</body>
+</html>
